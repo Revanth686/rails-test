@@ -58,6 +58,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "simplecov", require: false
+  gem "rspec_junit_formatter", require: false
 end
 
 group :test do
