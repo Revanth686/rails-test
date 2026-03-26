@@ -1,0 +1,36 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
+<%= render @post %>
+
+<section>
+  <h2>Comments (<%= @post.comments.count %>)</h2>
+
+  <% @post.comments.each do |comment| %>
+    <article>
+      <strong><%= comment.author_name %></strong> wrote:
+      <p><%= comment.body %></p>
+      <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, data: { confirm: "Remove this comment?" } %>
+    </article>
+  <% end %>
+
+  <h3>Leave a comment</h3>
+  <%= form_with model: [@post, Comment.new] do |f| %>
+    <div>
+      <%= f.label :author_name %>
+      <%= f.text_field :author_name %>
+    </div>
+    <div>
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 4 %>
+    </div>
+    <%= f.submit "Post Comment" %>
+  <% end %>
+</section>
+
+<div>
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", posts_path %>
+
+  <%= button_to "Destroy this post", @post, method: :delete %>
+</div>
