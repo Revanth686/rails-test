@@ -9,4 +9,4 @@ ignore:
 gates:
   - type: patch_coverage_percentage
     config:
-      threshold: 80
+      threshold: 99
