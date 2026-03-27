@@ -2,6 +2,8 @@
   <div>
     <strong>Title:</strong>
     <%= post.title %>
+    <em>(<%= post.reading_time %>)</em>
+    <%= post.published? ? "[Published]" : "[Draft]" %>
   </div>
 
   <div>
@@ -17,6 +19,9 @@
   <div>
     <strong>Views:</strong>
     <%= post.views_count %>
+    &middot;
+    <strong>Comments:</strong>
+    <%= post.comments.size %>
   </div>
 
   <% if post.tag_list.any? %>

@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     @posts = @posts.search(params[:q]) if params[:q].present?
     @posts = @posts.with_tag(params[:tag]) if params[:tag].present?
+    @posts = @posts.sorted_by(params[:sort])
   end
 
   # GET /posts/1 or /posts/1.json
