@@ -26,6 +26,25 @@ RSpec.describe Post, type: :model do
         expect(Post.published).not_to include(unpublished_post)
       end
     end
+
+    describe ".search" do
+      let!(:ruby_post)   { create(:post, title: "Ruby on Rails", body: "A web framework") }
+      let!(:python_post) { create(:post, title: "Python basics", body: "A scripting language") }
+
+      it "returns posts matching the title" do
+        expect(Post.search("Ruby")).to include(ruby_post)
+        expect(Post.search("Ruby")).not_to include(python_post)
+      end
+
+      it "returns posts matching the body" do
+        expect(Post.search("scripting")).to include(python_post)
+        expect(Post.search("scripting")).not_to include(ruby_post)
+      end
+
+      it "is case-insensitive" do
+        expect(Post.search("ruby")).to include(ruby_post)
+      end
+    end
   end
 
   describe "factory" do

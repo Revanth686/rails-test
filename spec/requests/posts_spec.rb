@@ -8,12 +8,32 @@ RSpec.describe "Posts", type: :request do
       get posts_path
       expect(response).to have_http_status(:ok)
     end
+
+    context "with a search query" do
+      let!(:matching_post) { create(:post, title: "Unique search term post") }
+
+      it "returns only posts matching the query" do
+        get posts_path, params: { q: "Unique search term" }
+        expect(response.body).to include("Unique search term post")
+        expect(response.body).not_to include(post_record.title)
+      end
+
+      it "returns all posts when query is blank" do
+        get posts_path
+        expect(response.body).to include(post_record.title)
+      end
+    end
   end
 
   describe "GET /posts/:id" do
     it "returns 200 OK for an existing post" do
       get post_path(post_record)
       expect(response).to have_http_status(:ok)
+    end
+
+    it "increments the views_count" do
+      expect { get post_path(post_record) }
+        .to change { post_record.reload.views_count }.by(1)
     end
 
     it "returns 404 for a missing post" do
