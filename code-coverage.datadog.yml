@@ -1,0 +1,12 @@
+schema-version: v1
+
+ignore:
+  - "spec/**/*"
+  - "db/migrate/**/*"
+  - "config/**/*"
+  - "vendor/**/*"
+
+gates:
+  - type: patch_coverage_percentage
+    config:
+      threshold: 80
