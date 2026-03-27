@@ -7,9 +7,13 @@
 <%= form_with url: posts_path, method: :get do |f| %>
   <%= f.search_field :q, value: params[:q], placeholder: "Search posts…" %>
   <%= f.submit "Search" %>
-  <% if params[:q].present? %>
+  <% if params[:q].present? || params[:tag].present? %>
     <%= link_to "Clear", posts_path %>
   <% end %>
+<% end %>
+
+<% if params[:tag].present? %>
+  <p>Filtering by tag: <strong><%= params[:tag] %></strong></p>
 <% end %>
 
 <div id="posts">
