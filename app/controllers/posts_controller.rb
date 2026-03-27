@@ -4,10 +4,13 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    @posts = @posts.search(params[:q]) if params[:q].present?
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    Post.update_counters(@post.id, views_count: 1)
+    @post.reload
   end
 
   # GET /posts/new

@@ -5,4 +5,5 @@ class Post < ApplicationRecord
   validates :body, presence: true
 
   scope :published, -> { where(published: true) }
+  scope :search, ->(query) { where("title LIKE ? OR body LIKE ?", "%#{sanitize_sql_like(query)}%", "%#{sanitize_sql_like(query)}%") }
 end
