@@ -92,7 +92,7 @@ jobs:
       - name: Install datadog-ci
         run: |
           curl -L --fail \
-            "https://github.com/DataDog/datadog-ci/releases/download/v5.2.0/datadog-ci_linux-x64" \
+            "https://github.com/DataDog/datadog-ci/releases/download/v5.10.0/datadog-ci_linux-x64" \
             --output "/usr/local/bin/datadog-ci"
           chmod +x /usr/local/bin/datadog-ci
 
