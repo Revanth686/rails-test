@@ -89,15 +89,14 @@ jobs:
           path: tmp/rspec.xml
           retention-days: 14
 
-      - name: Install datadog-ci
-        run: |
-          curl -L --fail \
-            "https://github.com/DataDog/datadog-ci/releases/download/v5.10.0/datadog-ci_linux-x64" \
-            --output "/usr/local/bin/datadog-ci"
-          chmod +x /usr/local/bin/datadog-ci
-
       - name: Upload coverage to Datadog
-        run: datadog-ci coverage upload --format=simplecov --skip-git-metadata-upload coverage/coverage.json
+        uses: DataDog/coverage-upload-github-action@v1
+        with:
+          api_key: ${{ secrets.DD_API_KEY }}
+          site: ${{ vars.DD_SITE }}
+          files: coverage/.resultset.json
+          format: simplecov
+          extra-args: --skip-git-metadata-upload
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_SITE: us5.datadoghq.com
