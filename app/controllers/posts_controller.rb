@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @posts = @posts.search(params[:q]) if params[:q].present?
+    @posts = @posts.with_tag(params[:tag]) if params[:tag].present?
+    @posts = @posts.sorted_by(params[:sort])
   end
 
   # GET /posts/1 or /posts/1.json
@@ -68,6 +70,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.expect(post: [ :title, :body, :published ])
+      params.expect(post: [ :title, :body, :published, :tag_list ])
     end
 end
