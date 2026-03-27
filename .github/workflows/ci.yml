@@ -94,7 +94,7 @@ jobs:
         with:
           api_key: ${{ secrets.DD_API_KEY }}
           site: ${{ vars.DD_SITE }}
-          files: coverage/.resultset.json
+          files: coverage/coverage.json
           format: simplecov
           extra-args: --skip-git-metadata-upload
         env:
