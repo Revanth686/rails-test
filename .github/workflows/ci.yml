@@ -97,7 +97,7 @@ jobs:
           chmod +x /usr/local/bin/datadog-ci
 
       - name: Upload coverage to Datadog
-        run: datadog-ci coverage upload --format=simplecov --skip-git-metadata-upload=1 coverage/coverage.json
+        run: datadog-ci coverage upload --format=simplecov --skip-git-metadata-upload coverage/coverage.json
         env:
           DD_API_KEY: ${{ secrets.DD_API_KEY }}
           DD_SITE: us5.datadoghq.com
